@@ -2,18 +2,33 @@ from . import mapping_en as mapping
 
 def numtext(number):
     number = int(number)
-    num_text = ''
+
+    if number == 0:
+        return map_one_digit(number)
+
+    num_text_words = []
 
     # handling for negative numbers
     if number < 0:
-        num_text += mapping.NEGATIVE + ' '
+        num_text_words.append(mapping.NEGATIVE)
         number *= -1
 
-    # handling for single digit numbers
-    if number < 1000:
-        num_text += map_three_digit(number)
+    # split number into groups of three
+    groups = []
+    while number:
+        groups.append(number % 1000)
+        number //= 1000
+
+    tier = len(groups)
+    while tier > 0:
+        tier -= 1
+
+        if groups[tier]:
+            num_text_words.append(map_three_digit(groups[tier]))
+            if tier > 0:
+                num_text_words.append(mapping.TIER[tier])
     
-    return num_text
+    return ' '.join(num_text_words)
 
 def map_one_digit(number):
     try:

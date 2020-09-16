@@ -39,7 +39,6 @@ DOUBLE_SPECIAL = {
     19: 'nineteen'
 }
 
-
 TIER = {
     1: 'thousand',
     2: 'million',

@@ -111,3 +111,41 @@ class TestNumtext(unittest.TestCase):
         self.assertEqual(map_three_digit(990), 'nine hundred and ninety')
 
         self.assertEqual(numtext(-876), 'negative eight hundred and seventy six')
+
+    def test_numtext_large_numbers(self):
+        self.assertEqual(
+            numtext(1000), 
+            'one thousand'
+        )
+        self.assertEqual(
+            numtext(5000), 
+            'five thousand'
+        )
+        self.assertEqual(
+            numtext(1111), 
+            'one thousand one hundred and eleven'
+        )
+        self.assertEqual(
+            numtext(76543), 
+            'seventy six thousand five hundred and fourty three'
+        )
+        self.assertEqual(
+            numtext(1000000),
+            'one million'
+        )
+        self.assertEqual(
+            numtext(123456789),
+            'one hundred and twenty three million four hundred and fifty six thousand seven hundred and eighty nine'
+        )
+        self.assertEqual(
+            numtext(1000100),
+            'one million one hundred'
+        )
+        self.assertEqual(
+            numtext(1000000000), 
+            'one billion'
+        )
+        self.assertEqual(
+            numtext(-999999),
+            'negative nine hundred and ninety nine thousand nine hundred and ninety nine'
+        )
