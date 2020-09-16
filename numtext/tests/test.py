@@ -9,6 +9,7 @@ class TestNumtext(unittest.TestCase):
         self.assertTrue(True)
     
     def test_map_single(self):
+        """Unit test for the map_single function"""
         self.assertEqual(map_single(0), 'zero')
         self.assertEqual(map_single(1), 'one')
         self.assertEqual(map_single(2), 'two')
@@ -25,8 +26,8 @@ class TestNumtext(unittest.TestCase):
         with self.assertRaises(ValueError):
             map_single(10)
 
-
     def test_numtext_single_digit(self):
+        """Test calling numtext on single digit numbers"""
         self.assertEqual(numtext(0), 'zero')
         self.assertEqual(numtext(1), 'one')
         self.assertEqual(numtext(2), 'two')
@@ -37,3 +38,9 @@ class TestNumtext(unittest.TestCase):
         self.assertEqual(numtext(7), 'seven')
         self.assertEqual(numtext(8), 'eight')
         self.assertEqual(numtext(9), 'nine')
+    
+    def test_numtext_negative(self):
+        """Test handling of negative numbers"""
+        self.assertEqual(numtext(-1), 'negative one')
+        self.assertEqual(numtext(-3), 'negative three')
+        self.assertEqual(numtext(-7), 'negative seven')
