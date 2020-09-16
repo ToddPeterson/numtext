@@ -1,3 +1,7 @@
+HUNDRED = 'hundred'
+NEGATIVE = 'negative'
+AND = 'and'
+
 SINGLE = {
     0: 'zero',
     1: 'one',
@@ -34,6 +38,7 @@ DOUBLE_SPECIAL = {
     18: 'eighteen',
     19: 'nineteen'
 }
+
 
 TIER = {
     1: 'thousand',

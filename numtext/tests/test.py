@@ -1,6 +1,6 @@
 import unittest
 
-from numtext.numtext import numtext, map_single, map_double
+from numtext.numtext import numtext, map_one_digit, map_two_digit, map_three_digit
 
 
 class TestNumtext(unittest.TestCase):
@@ -8,23 +8,21 @@ class TestNumtext(unittest.TestCase):
     def test_test(self):
         self.assertTrue(True)
     
-    def test_map_single(self):
-        """Unit test for the map_single function"""
-        self.assertEqual(map_single(0), 'zero')
-        self.assertEqual(map_single(1), 'one')
-        self.assertEqual(map_single(2), 'two')
-        self.assertEqual(map_single(3), 'three')
-        self.assertEqual(map_single(4), 'four')
-        self.assertEqual(map_single(5), 'five')
-        self.assertEqual(map_single(6), 'six')
-        self.assertEqual(map_single(7), 'seven')
-        self.assertEqual(map_single(8), 'eight')
-        self.assertEqual(map_single(9), 'nine')
+    def test_map_one_digit(self):
+        """Unit test for the map_one_digit function"""
+        self.assertEqual(map_one_digit(0), 'zero')
+        self.assertEqual(map_one_digit(1), 'one')
+        self.assertEqual(map_one_digit(2), 'two')
+        self.assertEqual(map_one_digit(3), 'three')
+        self.assertEqual(map_one_digit(4), 'four')
+        self.assertEqual(map_one_digit(5), 'five')
+        self.assertEqual(map_one_digit(6), 'six')
+        self.assertEqual(map_one_digit(7), 'seven')
+        self.assertEqual(map_one_digit(8), 'eight')
+        self.assertEqual(map_one_digit(9), 'nine')
 
         with self.assertRaises(ValueError):
-            map_single(-1)
-        with self.assertRaises(ValueError):
-            map_single(10)
+            map_one_digit(10)
 
     def test_numtext_single_digit(self):
         """Test calling numtext on single digit numbers"""
@@ -45,27 +43,25 @@ class TestNumtext(unittest.TestCase):
         self.assertEqual(numtext(-3), 'negative three')
         self.assertEqual(numtext(-7), 'negative seven')
 
-    def test_map_double(self):
-        """Unit test for the map_double function"""
-        self.assertEqual(map_double(11), 'eleven')
-        self.assertEqual(map_double(12), 'twelve')
-        self.assertEqual(map_double(16), 'sixteen')
-        self.assertEqual(map_double(19), 'nineteen')
+    def test_map_two_digit(self):
+        """Unit test for the map_two_digit function"""
+        self.assertEqual(map_two_digit(11), 'eleven')
+        self.assertEqual(map_two_digit(12), 'twelve')
+        self.assertEqual(map_two_digit(16), 'sixteen')
+        self.assertEqual(map_two_digit(19), 'nineteen')
 
-        self.assertEqual(map_double(10), 'ten')
-        self.assertEqual(map_double(40), 'fourty')
-        self.assertEqual(map_double(60), 'sixty')
-        self.assertEqual(map_double(90), 'ninety')
+        self.assertEqual(map_two_digit(10), 'ten')
+        self.assertEqual(map_two_digit(40), 'fourty')
+        self.assertEqual(map_two_digit(60), 'sixty')
+        self.assertEqual(map_two_digit(90), 'ninety')
 
-        self.assertEqual(map_double(21), 'twenty one')
-        self.assertEqual(map_double(45), 'fourty five')
-        self.assertEqual(map_double(67), 'sixty seven')
-        self.assertEqual(map_double(99), 'ninety nine')
+        self.assertEqual(map_two_digit(21), 'twenty one')
+        self.assertEqual(map_two_digit(45), 'fourty five')
+        self.assertEqual(map_two_digit(67), 'sixty seven')
+        self.assertEqual(map_two_digit(99), 'ninety nine')
 
         with self.assertRaises(ValueError):
-            map_double(1)
-        with self.assertRaises(ValueError):
-            map_double(100)
+            map_two_digit(100)
 
     def test_numtext_two_digit(self):
         """Test handling of two digit numbers"""
@@ -85,3 +81,33 @@ class TestNumtext(unittest.TestCase):
         self.assertEqual(numtext(99), 'ninety nine')
 
         self.assertEqual(numtext(-33), 'negative thirty three')
+
+    def test_map_three_digit(self):
+        """Unit test for map_three_digit"""
+        self.assertEqual(map_three_digit(100), 'one hundred')
+        self.assertEqual(map_three_digit(400), 'four hundred')
+        self.assertEqual(map_three_digit(800), 'eight hundred')
+
+        self.assertEqual(map_three_digit(202), 'two hundred and two')
+        self.assertEqual(map_three_digit(308), 'three hundred and eight')
+        self.assertEqual(map_three_digit(605), 'six hundred and five')
+
+        self.assertEqual(map_three_digit(111), 'one hundred and eleven')
+        self.assertEqual(map_three_digit(483), 'four hundred and eighty three')
+        self.assertEqual(map_three_digit(990), 'nine hundred and ninety')
+
+    def test_numtext_three_digit(self):
+        """Test handling of three digit numbers"""
+        self.assertEqual(map_three_digit(100), 'one hundred')
+        self.assertEqual(map_three_digit(400), 'four hundred')
+        self.assertEqual(map_three_digit(800), 'eight hundred')
+
+        self.assertEqual(map_three_digit(202), 'two hundred and two')
+        self.assertEqual(map_three_digit(308), 'three hundred and eight')
+        self.assertEqual(map_three_digit(605), 'six hundred and five')
+
+        self.assertEqual(map_three_digit(111), 'one hundred and eleven')
+        self.assertEqual(map_three_digit(483), 'four hundred and eighty three')
+        self.assertEqual(map_three_digit(990), 'nine hundred and ninety')
+
+        self.assertEqual(numtext(-876), 'negative eight hundred and seventy six')
