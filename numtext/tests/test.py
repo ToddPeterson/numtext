@@ -1,6 +1,6 @@
 import unittest
 
-from numtext.numtext import numtext, map_one_digit, map_two_digit, map_three_digit
+from numtext.numtext import numtext, map_one_digit, map_two_digit, map_three_digit, config
 
 
 class TestNumtext(unittest.TestCase):
@@ -149,3 +149,9 @@ class TestNumtext(unittest.TestCase):
             numtext(-999999),
             'negative nine hundred and ninety nine thousand nine hundred and ninety nine'
         )
+
+    def test_switch_naming_scheme(self):
+        """Test switching to a different naming scheme"""
+        self.assertEqual(numtext(1000000000), 'one billion')
+        config.naming_scheme = 'eu_long'
+        self.assertEqual(numtext(1000000000), 'one milliard')
