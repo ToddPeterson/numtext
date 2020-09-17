@@ -1,3 +1,5 @@
+""" American short form naming """
+
 HUNDRED = 'hundred'
 NEGATIVE = 'negative'
 AND = 'and'

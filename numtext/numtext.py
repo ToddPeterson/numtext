@@ -1,4 +1,4 @@
-from . import mapping_en as mapping
+from .config import config
 
 def numtext(number):
     number = int(number)
@@ -10,7 +10,7 @@ def numtext(number):
 
     # handling for negative numbers
     if number < 0:
-        num_text_words.append(mapping.NEGATIVE)
+        num_text_words.append(config.naming_scheme.NEGATIVE)
         number *= -1
 
     # split number into groups of three
@@ -26,13 +26,13 @@ def numtext(number):
         if groups[tier]:
             num_text_words.append(map_three_digit(groups[tier]))
             if tier > 0:
-                num_text_words.append(mapping.TIER[tier])
+                num_text_words.append(config.naming_scheme.TIER[tier])
     
     return ' '.join(num_text_words)
 
 def map_one_digit(number):
     try:
-        return mapping.SINGLE[number]
+        return config.naming_scheme.SINGLE[number]
     except KeyError:
         raise ValueError('Expected a single digit number')
 
@@ -42,13 +42,13 @@ def map_two_digit(number):
     if number < 10:
         return map_one_digit(number)
 
-    if number in mapping.DOUBLE_SPECIAL:
-        return mapping.DOUBLE_SPECIAL[number]
+    if number in config.naming_scheme.DOUBLE_SPECIAL:
+        return config.naming_scheme.DOUBLE_SPECIAL[number]
 
     ones = number % 10
     tens = number // 10
 
-    num_text = mapping.DOUBLE[tens]
+    num_text = config.naming_scheme.DOUBLE[tens]
 
     if ones > 0:
         num_text += ' ' + map_one_digit(ones)
@@ -64,11 +64,11 @@ def map_three_digit(number):
     tens = number % 100
     hundreds = number // 100
 
-    num_text = mapping.SINGLE[hundreds]
-    num_text += ' ' + mapping.HUNDRED
+    num_text = config.naming_scheme.SINGLE[hundreds]
+    num_text += ' ' + config.naming_scheme.HUNDRED
 
     if tens > 0:
-        num_text += ' ' + mapping.AND + ' '
+        num_text += ' ' + config.naming_scheme.AND + ' '
         num_text += map_two_digit(tens)
 
     return num_text
