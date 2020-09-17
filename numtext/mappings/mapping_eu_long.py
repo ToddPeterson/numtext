@@ -1,4 +1,4 @@
-""" American short form naming """
+""" European long form naming """
 
 HUNDRED = 'hundred'
 NEGATIVE = 'negative'
